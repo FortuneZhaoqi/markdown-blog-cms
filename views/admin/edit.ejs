@@ -1,0 +1,39 @@
+<%
+const formatDate = date => new Date(date).toISOString().split('T')[0];
+%>
+
+<h1><%= post ? 'Edit' : 'New' %> Post</h1>
+
+<form action="<%= post ? '/admin/' + post.slug + '/edit' : '/admin/new' %>" method="POST">
+    <label>Title:</label><br>
+    <input type="text" name="title" value="<%= post?.metadata.title || '' %>" required /><br>
+
+    <label>Date:</label><br>
+    <input type="date" name="date" value="<%= post ? formatDate(post.metadata.date) : '' %>" required /><br>
+
+    <label>Tags (comma separated):</label><br>
+    <input type="text" id="tags" name="tags" value="<%= post?.metadata.tags?.join(', ') || '' %>" autocomplete="off" />
+    <small>e.g., nodejs, express, tutorial</small>
+    <ul id="tags-suggestions"></ul>
+
+    <label>Content (Markdown):</label><br>
+    <div style="display: flex; gap: 1rem;">
+        <textarea
+                id="content"
+                name="content"
+                rows="20"
+                style="flex: 1; font-family: monospace;"
+        ><%= post?.content || '' %></textarea>
+        <div id="preview" style="flex: 1; border: 1px solid #ccc; padding: 1rem; background: #f9f9f9;">
+            <em>Live Preview</em>
+        </div>
+    </div>
+
+
+    <button type="submit">Save</button>
+</form>
+
+<a href="/admin">← Back to dashboard</a>
+
+<script src="/tags.js"></script>
+<script type="module" src="/preview.js"></script>

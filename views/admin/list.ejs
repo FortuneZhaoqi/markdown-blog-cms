@@ -1,0 +1,14 @@
+<h1>Admin Dashboard</h1>
+<a href="/admin/new">+ New Post</a>
+<ul>
+    <% posts.forEach(post => { %>
+        <li>
+            <strong><%= post.metadata.title %></strong>
+            <small>(<%= post.slug %>)</small>
+            <form action="/admin/<%= post.slug %>/delete" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+            </form>
+            <a href="/admin/<%= post.slug %>/edit">Edit</a>
+        </li>
+    <% }) %>
+</ul>

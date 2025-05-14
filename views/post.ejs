@@ -1,0 +1,22 @@
+<article>
+    <h1><%= post.metadata.title %></h1>
+    <p><i><%= new Date(post.metadata.date).toLocaleDateString() %></i></p>
+    <div><%- post.content %></div>
+</article>
+<a href="/blog">🔙 Back to blog</a>
+
+<hr>
+<h2>Comments</h2>
+<div id="comments"></div>
+
+<form id="comment-form">
+    <input type="text" name="author" placeholder="Your name" required /><br>
+    <textarea name="text" placeholder="Your comment" required></textarea><br>
+    <button type="submit">Post Comment</button>
+</form>
+
+<script src="/comments.js"></script>
+<script>
+  const slug = "<%= post.metadata.title ? post.metadata.title.toLowerCase().replace(/\s+/g, '-') : '' %>";
+  initComments(slug);
+</script>

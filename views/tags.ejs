@@ -1,0 +1,11 @@
+<h1>All Tags</h1>
+
+<ul>
+    <% tags.forEach(([tag, count]) => { %>
+        <li>
+            <a href="/blog/tag/<%= tag %>">#<%= tag %></a> (<%= count %>)
+        </li>
+    <% }) %>
+</ul>
+
+<a href="/blog">← Back to blog</a>

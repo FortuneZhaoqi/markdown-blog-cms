@@ -1,0 +1,28 @@
+<form action="/blog" method="GET">
+    <input
+            type="text"
+            name="q"
+            placeholder="Search posts..."
+            value="<%= query || '' %>"
+    />
+    <button type="submit">Search</button>
+</form>
+
+<h1><%= title %></h1>
+<ul>
+    <% posts.forEach(post => { %>
+        <li>
+            <a href="/blog/<%= post.slug %>"><%= post.metadata.title %></a>
+            <small>— <%= new Date(post.metadata.date).toLocaleDateString() %></small><br>
+            <% if (post.metadata.tags.length) { %>
+                Tags:
+                <% post.metadata.tags.forEach(tag => { %>
+                    <a href="/blog/tag/<%= tag %>">#<%= tag %></a>
+                <% }) %>
+            <% } %>
+        </li>
+    <% }) %>
+</ul>
+<% if (currentTag) { %>
+    <a href="/blog">← View all posts</a>
+<% } %>
